@@ -30,17 +30,6 @@ Notification 主要有三大步驟
 2. Send push Notification or schedule local notification(發出通知)
 3. Handle Action
 
-# IOS  7
-
- * User notifications (sound, badge, banner, alertiview, notification center,lock screen)
- * 
-
-# IOS 8
- * User Notifications
- * Notification Actions
- * Remote Notifications
- * Location Notifications
-
 # Notification
 
 |IOS 7  |IOS 8|
