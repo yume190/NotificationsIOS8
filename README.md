@@ -19,36 +19,36 @@ Require user approval
 
 ### Register
 
-UIUserNotificationType types = UIUserNotificationTypeBadge |
-  UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
-
-UIUserNotificationSettings *mySettings = [UIUserNotificationSettings
-  settingsForTypes:types categories:nil];
-
-[[UIApplication sharedApplication]
-  registerUserNotificationSettings:mySettings];
-
----
-
-//UIApplicationDelegate Callback
- - (void)application:(UIApplication *)application
-    didRegisterUserNotificationSettings:
-    (UIUserNotificationSettings *)notificationSettings {
-    // user has allowed receiving user notifications of the following types
-    UIUserNotificationType allowedTypes = [notificationSettings types];
-}
+    UIUserNotificationType types = UIUserNotificationTypeBadge |
+      UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+    
+    UIUserNotificationSettings *mySettings = [UIUserNotificationSettings
+      settingsForTypes:types categories:nil];
+    
+    [[UIApplication sharedApplication]
+      registerUserNotificationSettings:mySettings];
 
 ---
 
-//Getting Settings
-- (void)getReadyForNotification {
-   // ...
+    //UIApplicationDelegate Callback
+     - (void)application:(UIApplication *)application
+        didRegisterUserNotificationSettings:
+        (UIUserNotificationSettings *)notificationSettings {
+        // user has allowed receiving user notifications of the following types
+        UIUserNotificationType allowedTypes = [notificationSettings types];
+    }
 
-   // check to make sure we still need to show notification
-   UIUserNotificationSettings *currentSettings = [[UIApplication
-       sharedApplication] currentUserNotificationSettings];
-   [self checkSettings:currentSettings];
-}
+---
+
+    //Getting Settings
+    - (void)getReadyForNotification {
+       // ...
+    
+       // check to make sure we still need to show notification
+       UIUserNotificationSettings *currentSettings = [[UIApplication
+           sharedApplication] currentUserNotificationSettings];
+       [self checkSettings:currentSettings];
+    }
 
 ---
 
@@ -72,21 +72,21 @@ Notification 3個步驟
 
 ##### Actions
 
-UIMutableUserNotificationAction *acceptAction =
-[[UIMutableUserNotificationAction alloc] init];
-
-acceptAction.identifier = @"ACCEPT_IDENTIFIER";
-
-acceptAction.title = @"Accept";
-
-// yume
-// you will have on the order of seconds, not minutes, to run
-
-// Given seconds, not minutes, to run in the background 
-acceptAction.activationMode = UIUserNotificationActivationModeBackground; 
-acceptAction.destructive = NO;
-
-// If YES requires passcode, but does not unlock the device acceptAction.authenticationRequired = NO;
+    UIMutableUserNotificationAction *acceptAction =
+    [[UIMutableUserNotificationAction alloc] init];
+    
+    acceptAction.identifier = @"ACCEPT_IDENTIFIER";
+    
+    acceptAction.title = @"Accept";
+    
+    // yume
+    // you will have on the order of seconds, not minutes, to run
+    
+    // Given seconds, not minutes, to run in the background 
+    acceptAction.activationMode = UIUserNotificationActivationModeBackground; 
+    acceptAction.destructive = NO;
+    
+    // If YES requires passcode, but does not unlock the device acceptAction.authenticationRequired = NO;
 
 ---
 
@@ -98,31 +98,31 @@ acceptAction.destructive = NO;
 |New mail |Mark as Read, Trash   |
 |Tagged   |Like, Comment, Untag  |
 
-UIMutableUserNotificationCategory *inviteCategory =
-[[UIMutableUserNotificationCategory alloc] init];
-
-// yume
-// You'll include this identifier in your push payload and local notification
-inviteCategory.identifier = @"INVITE_CATEGORY";
-
-[inviteCategory setActions:@[acceptAction, maybeAction, declineAction]
-    forContext:UIUserNotificationActionContextDefault];
-// yume
-// 2 action context
-// Default action context supports up to four actions (show first 2,只會顯示前2個)
-// minimal action context is used when there's only room for two actions
+    UIMutableUserNotificationCategory *inviteCategory =
+    [[UIMutableUserNotificationCategory alloc] init];
+    
+    // yume
+    // You'll include this identifier in your push payload and local notification
+    inviteCategory.identifier = @"INVITE_CATEGORY";
+    
+    [inviteCategory setActions:@[acceptAction, maybeAction, declineAction]
+        forContext:UIUserNotificationActionContextDefault];
+    // yume
+    // 2 action context
+    // Default action context supports up to four actions (show first 2,只會顯示前2個)
+    // minimal action context is used when there's only room for two actions
 
 ---
 
 ##### Setting
 
-NSSet *categories = [NSSet setWithObjects:inviteCategory, alarmCategory, ...
-
-UIUserNotificationSettings *settings =
-   [UIUserNotificationSettings settingsForTypes:types categories:categories];
-
-[[UIApplication sharedApplication]
-registerUserNotificationSettings:settings];
+    NSSet *categories = [NSSet setWithObjects:inviteCategory, alarmCategory, ...
+    
+    UIUserNotificationSettings *settings =
+       [UIUserNotificationSettings settingsForTypes:types categories:categories];
+    
+    [[UIApplication sharedApplication]
+    registerUserNotificationSettings:settings];
   
 ---
 
@@ -130,25 +130,25 @@ registerUserNotificationSettings:settings];
 
 ##### Push notification
 
-// yume
-// You need to include the category identifier in your push payload
-// push payload has now been increased to 2KB
-{
-   "aps" : {
-      "alert" : "You’re invited!",
-      "category" : "INVITE_CATEGORY",
-   } 
-}
+    // yume
+    // You need to include the category identifier in your push payload
+    // push payload has now been increased to 2KB
+    {
+       "aps" : {
+          "alert" : "You’re invited!",
+          "category" : "INVITE_CATEGORY",
+       } 
+    }
 
 ---
 
 ##### Local notification
 
-UILocalNotification *notification = [[UILocalNotification alloc] init]; ...
-
-notification.category = @"INVITE_CATEGORY";
-
-[[UIApplication sharedApplication] scheduleLocalNotification:notification]
+    UILocalNotification *notification = [[UILocalNotification alloc] init]; ...
+    
+    notification.category = @"INVITE_CATEGORY";
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification]
 
 ---
 
@@ -168,13 +168,13 @@ define core location region objects and attach them to this notififcaion, so tha
 
 ---
 
-//Core Location registration
-CLLocationManager *locMan = [[CLLocationManager alloc] init];
-
-locMan.delegate = self;
-
-// request authorization to track the user’s location
-[locMan requestWhenInUseAuthorization];
+    //Core Location registration
+    CLLocationManager *locMan = [[CLLocationManager alloc] init];
+    
+    locMan.delegate = self;
+    
+    // request authorization to track the user’s location
+    [locMan requestWhenInUseAuthorization];
 
 ---
 
@@ -184,7 +184,7 @@ Information Property List
 
 ---
 
-Core Location registration callbacks
+    // Core Location registration callbacks
     - (void)locationManager:(CLLocationManager *)manager
         didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     
