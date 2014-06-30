@@ -7,16 +7,16 @@ NotificationsIOS8
  * Silent notifications
 
 # IOS 8
-User Notifications
-Notification Actions
-Remote Notifications
-Location Notifications
+ * User Notifications
+ * Notification Actions
+ * Remote Notifications
+ * Location Notifications
 
 # User Notifications(remote or local notification)
 
-Must register to use 
-Require user approval
-必須註冊才能使用，並且徵求使用者同意
+ * Must register to use 
+ * Require user approval
+ * (必須註冊才能使用，並且徵求使用者同意)
 
 ### Register
 
@@ -55,12 +55,12 @@ Require user approval
 
 # Notification Actions
 
-lock screen (left) 2 actions
-notification center (left) 2 actions
-banners (pull down) 2 actions
-alertview 4 actions
+ * lock screen (left) 2 actions
+ * notification center (left) 2 actions
+ * banners (pull down) 2 actions
+ * alertview 4 actions
 
-Notification 3個步驟
+## Notification 3個步驟
 
 1. Register Action 
  * Action
@@ -87,7 +87,8 @@ Notification 3個步驟
     acceptAction.activationMode = UIUserNotificationActivationModeBackground; 
     acceptAction.destructive = NO;
     
-    // If YES requires passcode, but does not unlock the device acceptAction.authenticationRequired = NO;
+    // If YES requires passcode, but does not unlock the device 
+    acceptAction.authenticationRequired = NO;
 
 ---
 
