@@ -42,7 +42,8 @@ Notification 主要有三大步驟
 |New mail |Mark as Read, Trash   |
 |Tagged   |Like, Comment, Untag  |
 
-此外一定要用大標標出來的是 Push payload的限制由 256 Byte 增加到 <h1>2KB</h1>
+# 此外一定要用大標標出來的是 Push payload 的限制由 256 Byte 增加到 2KB！！！
+# 另外一個大標是 locNotification.region = CL_XX_Region 可以支援CL_XX_Region系列，XX可能是Circular，也可以是Beacon！！！
 
 # Notification
 
