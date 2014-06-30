@@ -33,13 +33,19 @@ Notification 主要有三大步驟
 # IOS  7
 
  * User notifications (sound, badge, banner, alertiview, notification center,lock screen)
- * Silent notifications
+ * 
 
 # IOS 8
  * User Notifications
  * Notification Actions
  * Remote Notifications
  * Location Notifications
+
+# Notification
+
+|IOS 7  |IOS 8|
+|:-----:|:---:|
+|User notifications<br />(sound, badge, banner, alertiview, notification center,lock screen)<br />Silent notifications|User Notifications<br />Notification Actions<br />Remote Notifications<br />Location Notifications|
 
 # User Notifications(remote or local notification)
 
