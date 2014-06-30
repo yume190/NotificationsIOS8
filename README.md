@@ -2,8 +2,9 @@ NotificationsIOS8
 =================
 
 # IOS  7
-User notifications (sound, badge, banner, alertiview, notification center,lock screen)
-Silent notifications
+
+ * User notifications (sound, badge, banner, alertiview, notification center,lock screen)
+ * Silent notifications
 
 # IOS 8
 User Notifications
