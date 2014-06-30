@@ -25,10 +25,16 @@ Notification 主要有三大步驟
 
 1. Register Actions(註冊Actions)
  * Action(自定義Acation，包含他的Identifier, title, activationMode, destructive, authenticationRequired共五個屬性)
- * Category(把Actions group in Category裡，例如：郵件Category可以包含寫郵件，讀郵件，刪除郵件三種Action)
+ * Category(把Actions group in Category裡，例如：郵件Category可以包含寫郵件，讀郵件，刪除郵件三種Action，如下面Table)
  * Settings(你的APP當然不是只有郵件Category，可能還有廣告Category，吃飯Category。用NSSet把這三個Category打包起來)
 2. Send push Notification or schedule local notification(發出通知)
 3. Handle Action
+
+|Category |Actions               |
+|:-------:|:--------------------:|
+|Invite   |Accept, Maybe, Decline|
+|New mail |Mark as Read, Trash   |
+|Tagged   |Like, Comment, Untag  |
 
 # Notification
 
