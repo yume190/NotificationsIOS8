@@ -1,6 +1,35 @@
 NotificationsIOS8 (WWDC Session 713 What's new in ios notification)
 =================
 
+稍微看了一下Session 713(Notification)，這次主要在IOS8新增了一些功能
+分別是：
+ * User Notifications
+ * Notification Actions
+ * Remote Notifications
+ * Location Notifications
+
+首先，不管是使用 Remote 或者是 Local notification都必須要註冊，並且徵求使用者同意。
+
+Notification 的 type 也跟之前的 Push 一樣分為 Badge, Sound, Alert
+
+Notification 在不同的地方，顯示的Action數量也會不同
+
+|地方                |手勢 |Action數量|
+|:-----------------:|:---:|:-------:|
+|lock screen        |向左滑|2 actions|
+|notification center|向左滑|2 actions|
+|banners            |往下拉|2 actions|
+|alertview          |無   |4 actions|
+
+Notification 主要有三大步驟
+
+1. Register Action 
+ * Action
+ * Category
+ * Settings
+2. Send push Notification or schedule local notification
+3. Handle Action
+
 # IOS  7
 
  * User notifications (sound, badge, banner, alertiview, notification center,lock screen)
