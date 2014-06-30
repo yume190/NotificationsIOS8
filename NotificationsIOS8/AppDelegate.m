@@ -64,10 +64,48 @@
 
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
     // user has allowed receiving user notifications of the following types
-    UIUserNotificationType allowedTypes = [notificationSettings types];
+//    UIUserNotificationType allowedTypes = [notificationSettings types];
+    NSLog(@"Notification : %@",notificationSettings);
 }
 
 #pragma mark - Notification Process
+
+// background : didFinishLaunchingWithOptions -> didReceiveLocalNotification/didReceiveRemoteNotification
+-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
+    NSLog(@"%@",notification);
+}
+
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+    NSLog(@"%@",userInfo);
+}
+
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
+    NSLog(@"%@",userInfo);
+}
+
+-(void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)())completionHandler{
+    if ([identifier isEqualToString:@"ACCEPT_IDENTIFIER"]) {
+        NSLog(@"%@ %@",identifier,notification);
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"You accepted" message:nil delegate:nil cancelButtonTitle:@"no" otherButtonTitles:@"Yay!!", nil];
+        [alert show];
+    }else if ([identifier isEqualToString:@"MAYBE_IDENTIFIER"]) {
+        NSLog(@"%@ %@",identifier,notification);
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"You say Maybe" message:nil delegate:nil cancelButtonTitle:@"no" otherButtonTitles:@"So sad :(", nil];
+        [alert show];
+    }
+    
+    // Must be called when finished
+    completionHandler();
+}
+
+-(void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void (^)())completionHandler{
+    if ([identifier isEqualToString:@"ACCEPT_IDENTIFIER"]) {
+        NSLog(@"%@ %@",identifier,userInfo);
+    }
+    
+    // Must be called when finished
+    completionHandler();
+}
 
 //- (void)getReadyForNotification {
 //    // ...
@@ -104,7 +142,7 @@
     
     
     UIMutableUserNotificationAction *declineAction = [[UIMutableUserNotificationAction alloc] init];
-    declineAction.identifier = @"ACCEPT_IDENTIFIER";
+    declineAction.identifier = @"DECLINE_IDENTIFIER";
     declineAction.title = @"Accept";
     declineAction.activationMode = UIUserNotificationActivationModeForeground;
     declineAction.destructive = YES;
