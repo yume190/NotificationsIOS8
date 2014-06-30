@@ -42,6 +42,8 @@ Notification 主要有三大步驟
 |New mail |Mark as Read, Trash   |
 |Tagged   |Like, Comment, Untag  |
 
+此外一定要用大標標出來的是 Push payload的限制由 256 Byte -> <h1>2KB<</h1>>
+
 # Notification
 
 |IOS 7  |IOS 8|
