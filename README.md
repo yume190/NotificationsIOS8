@@ -1,4 +1,4 @@
-NotificationsIOS8
+NotificationsIOS8 (WWDC Session 713 What's new in ios notification)
 =================
 
 # IOS  7
