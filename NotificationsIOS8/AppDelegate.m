@@ -18,6 +18,23 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+    
+    UIUserNotificationSettings *mySettings = [UIUserNotificationSettings
+                                              settingsForTypes:types categories:[self prepareCategories]];
+    
+    [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
+    
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    
+    for (int index = 1; index <= 4; index++) {
+        notification.fireDate = [[NSDate date] dateByAddingTimeInterval:index * 5];
+        notification.alertBody = @"IOS 8 Notification";
+        notification.category = @"INVITE_CATEGORY";
+        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    }
+    
     return YES;
 }
 
@@ -43,4 +60,64 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+#pragma mark - Notification Callback
+
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+    // user has allowed receiving user notifications of the following types
+    UIUserNotificationType allowedTypes = [notificationSettings types];
+}
+
+#pragma mark - Notification Process
+
+//- (void)getReadyForNotification {
+//    // ...
+//    
+//    // check to make sure we still need to show notification
+//    UIUserNotificationSettings *currentSettings = [[UIApplication
+//                                                    sharedApplication] currentUserNotificationSettings];
+//    [self checkSettings:currentSettings];
+//}
+
+#pragma mark - Prepare Actions -> Group into Category
+
+-(NSSet *)prepareCategories{
+    UIMutableUserNotificationAction *acceptAction = [[UIMutableUserNotificationAction alloc] init];
+
+    acceptAction.identifier = @"ACCEPT_IDENTIFIER";
+
+    acceptAction.title = @"Accept";
+
+    // Given seconds, not minutes, to run in the background
+    acceptAction.activationMode = UIUserNotificationActivationModeBackground;
+    acceptAction.destructive = NO;
+
+    // If YES requires passcode, but does not unlock the device
+    acceptAction.authenticationRequired = NO;
+    
+    
+    UIMutableUserNotificationAction *maybeAction = [[UIMutableUserNotificationAction alloc] init];
+    maybeAction.identifier = @"MAYBE_IDENTIFIER";
+    maybeAction.title = @"Maybe";
+    maybeAction.activationMode = UIUserNotificationActivationModeBackground;
+    maybeAction.destructive = NO;
+    maybeAction.authenticationRequired = NO;
+    
+    
+    UIMutableUserNotificationAction *declineAction = [[UIMutableUserNotificationAction alloc] init];
+    declineAction.identifier = @"ACCEPT_IDENTIFIER";
+    declineAction.title = @"Accept";
+    declineAction.activationMode = UIUserNotificationActivationModeForeground;
+    declineAction.destructive = YES;
+    declineAction.authenticationRequired = YES;
+    
+    
+    UIMutableUserNotificationCategory *inviteCategory = [[UIMutableUserNotificationCategory alloc] init];
+    inviteCategory.identifier = @"INVITE_CATEGORY";
+    [inviteCategory setActions:@[acceptAction, maybeAction, declineAction]
+                    forContext:UIUserNotificationActionContextDefault];
+    
+//    NSSet *categories = [NSSet setWithObjects:inviteCategory, alarmCategory, ...
+    NSSet *categories = [NSSet setWithObjects:inviteCategory, nil];
+    return categories;
+}
 @end
