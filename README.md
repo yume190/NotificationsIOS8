@@ -1,6 +1,7 @@
 NotificationsIOS8 (WWDC Session 713 What's new in ios notification)
-(進度：未完，停留在沒有實機無法測ＰＵＳＨ跟ＬＯＣＡＬ ＮＯＴＩＦＩＣＡＴＩＯＮ)
 =================
+
+(進度：未完，停留在沒有實機無法測ＰＵＳＨ跟ＬＯＣＡＬ ＮＯＴＩＦＩＣＡＴＩＯＮ)
 
 稍微看了一下Session 713(Notification)，這次主要在IOS8新增了一些功能
 分別是：
